@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'api',
     'posts',
     'djoser',
-    'posts.apps.PostsConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
