@@ -3,19 +3,6 @@ from django.db import models
 
 User = get_user_model()
 
-
-class Post(models.Model):
-    text = models.TextField()
-    pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
-    author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='posts')
-    image = models.ImageField(
-        upload_to='posts/', null=True, blank=True)
-
-    def __str__(self):
-        return self.text
-    
-
 class Group(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
@@ -24,6 +11,25 @@ class Group(models.Model):
     def __str__(self):
         return self.title
 
+
+class Post(models.Model):
+    text = models.TextField()
+    pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='posts')
+    image = models.ImageField(
+        upload_to='posts/', null=True, blank=True)
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.SET_NULL,
+        related_name='posts',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.text
+    
 
 class Comment(models.Model):
     author = models.ForeignKey(
@@ -41,7 +47,7 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='follower',
     )
-    author = models.ForeignKey(
+    following = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='following',
@@ -50,6 +56,6 @@ class Follow(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['user', 'author'], name='unique_follow'
+                fields=['user', 'following'], name='unique_follow'
             )
         ]

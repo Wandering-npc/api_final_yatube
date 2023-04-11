@@ -17,8 +17,8 @@ class GroupSerializer(serializers.ModelSerializer):
     """Сериализация групп."""
 
     class Meta:
-        model = Group
         fields = '__all__'
+        model = Group
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -28,12 +28,13 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = '__all__'
+        read_only_fields = ('post',)
         model = Comment
 
 class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(read_only=True,
                                         slug_field='username')
-    author = serializers.SlugRelatedField(queryset=User.objects.all(),
+    following = serializers.SlugRelatedField(queryset=User.objects.all(),
                                           slug_field='username')
     class Meta:
         model = Follow
