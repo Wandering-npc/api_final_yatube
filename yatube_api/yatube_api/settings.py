@@ -93,7 +93,7 @@ STATICFILES_DIRS = ((BASE_DIR / 'static/'),)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly', 
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     # Изменили токен, вместо JWT подключили auth_token:
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -102,10 +102,8 @@ REST_FRAMEWORK = {
 
 }
 SIMPLE_JWT = {
-    # Устанавливаем срок жизни токена
    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
    'AUTH_HEADER_TYPES': ('Bearer',),
-} 
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

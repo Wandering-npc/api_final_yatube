@@ -31,13 +31,17 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('post',)
         model = Comment
 
+
 class FollowSerializer(serializers.ModelSerializer):
     """Сериализация подписок"""
-    user = serializers.SlugRelatedField(read_only=True,
-                                        slug_field='username',
-                                        default=serializers.CurrentUserDefault())
-    following = serializers.SlugRelatedField(queryset=User.objects.all(),
-                                          slug_field='username')
+    user = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='username',
+        default=serializers.CurrentUserDefault())
+    following = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username')
+    
     class Meta:
         model = Follow
         fields = '__all__'
@@ -48,6 +52,7 @@ class FollowSerializer(serializers.ModelSerializer):
                 message='Ошибка'
             )
         ]
+    
     def validate_following(self, value):
         if value == self.context['request'].user:
             raise serializers.ValidationError(
