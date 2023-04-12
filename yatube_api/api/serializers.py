@@ -41,7 +41,7 @@ class FollowSerializer(serializers.ModelSerializer):
     following = serializers.SlugRelatedField(
         queryset=User.objects.all(),
         slug_field='username')
-    
+
     class Meta:
         model = Follow
         fields = '__all__'
@@ -52,7 +52,7 @@ class FollowSerializer(serializers.ModelSerializer):
                 message='Ошибка'
             )
         ]
-    
+
     def validate_following(self, value):
         if value == self.context['request'].user:
             raise serializers.ValidationError(
