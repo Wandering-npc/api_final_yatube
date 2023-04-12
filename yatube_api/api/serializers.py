@@ -32,8 +32,10 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
 
 class FollowSerializer(serializers.ModelSerializer):
+    """Сериализация подписок"""
     user = serializers.SlugRelatedField(read_only=True,
-                                        slug_field='username')
+                                        slug_field='username',
+                                        default=serializers.CurrentUserDefault())
     following = serializers.SlugRelatedField(queryset=User.objects.all(),
                                           slug_field='username')
     class Meta:
@@ -43,7 +45,7 @@ class FollowSerializer(serializers.ModelSerializer):
             serializers.UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
                 fields=['user', 'following'],
-                message='Вы уже подписаны!'
+                message='Ошибка'
             )
         ]
     def validate_following(self, value):
