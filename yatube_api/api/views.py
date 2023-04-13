@@ -48,7 +48,8 @@ class CommentViewSet(viewsets.ModelViewSet):
 class FollowViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
-    viewsets.GenericViewSet,):
+    viewsets.GenericViewSet,
+):
     """Вьюсет для подписки."""
     serializer_class = FollowSerializer
     permission_classes = [permissions.IsAuthenticated]
