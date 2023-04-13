@@ -29,14 +29,14 @@
     "image": null,  
     "group": null  
 }`   
-Пример Post-запроса с подпиской на автора к /api/v1/follow/
-```{
+Пример Post-запроса с подпиской на автора к /api/v1/follow/  
+`{
     "user": "Danilo",
     "following": "DANILO"
-}```
-Ответ
-```{
+}`
+Ответ  
+`{
     "id": 1,
     "user": "Danilo",
     "following": "DANILO"
-}```
+}`
