@@ -33,7 +33,7 @@
 `{
     "user": "Danilo",
     "following": "DANILO"
-}`
+}`  
 Ответ  
 `{
     "id": 1,
